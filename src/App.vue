@@ -62,8 +62,16 @@ export default class App extends Vue {
         this.passList.splice(0)
         
         console.log(response.data.data);
-        
-        for(const[key, value] of Object.entries(response.data.data)) {
+          type obj = {
+            date: string; 
+            critical: string;
+            deaths: string;
+            death_ratio: string;
+            recovered: string;
+            recovery_ratio: string;
+            total_cases: string;
+          };
+        for(let[key, value] of Object.entries(response.data.data)) {
           this.passList.push({
             date: key, 
             critical: value.critical,
