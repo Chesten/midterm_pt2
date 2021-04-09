@@ -50,7 +50,7 @@ export default class App extends Vue {
       console.log("selected value Changed: " + this.selected)
       this.previousSelected=this.selected;
       const options = {
-        url: 'https://coronavirus-map.p.rapidapi.com/v1/spots/year',
+        url: 'https://coronavirus-map.p.rapidapi.com/v1/spots/week',
         params: {region: this.selected},
         headers: {
           'x-rapidapi-key': '098711bbdfmsh21dcfd23d779303p10951bjsnce5d1aafb119',
@@ -74,12 +74,12 @@ export default class App extends Vue {
         for(let[key, value] of Object.entries(response.data.data)) {
           this.passList.push({
             date: key, 
-            critical: value.critical,
-            deaths: value.deaths,
-            death_ratio: value.death_ratio,
-            recovered: value.recovered,
-            recovery_ratio: value.recovery_ratio,
-            total_cases: value.total_cases,
+            critical: value["critical"],
+            deaths: value["deaths"],
+            death_ratio: value["death_ratio"],
+            recovered: value["recovered"],
+            recovery_ratio: value["recovery_ratio"],
+            total_cases: value["total_cases"],
         })
         }
       }).catch(function (error) {
