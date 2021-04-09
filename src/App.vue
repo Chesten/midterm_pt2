@@ -71,7 +71,7 @@ export default class App extends Vue {
             death_ratio: value.death_ratio,
             recovered: value.recovered,
             recovery_ratio: value.recovery_ratio,
-            total_cases: value.total_cases
+            total_cases: value.total_cases,
         })
         }
       }).catch(function (error) {
