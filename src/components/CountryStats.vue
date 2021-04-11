@@ -73,8 +73,8 @@
     text-align: left;
     font-size: .9em;
 }
-tr:nth-child(even) {background:blue}
-tr:nth-child(odd) {background:coral}
+.display tr:nth-child(even) {background:blue}
+.display tr:nth-child(odd) {background:coral}
 
 </style>
 
