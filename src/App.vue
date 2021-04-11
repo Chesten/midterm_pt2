@@ -13,11 +13,12 @@
             <option v-for="(z, pos) in countyList" :key="pos">{{z.name}}</option>
           </select>
         </div>
-    </div>
+    </div >
+    <div id="content">
     <WorldStats></WorldStats>
-    <CountryStats v-bind:country="selected" v-bind:data="passList"></CountryStats>
+    <CountryStats v-bind:country="selected"></CountryStats>
     <ActivityLog></ActivityLog>
-    
+    </div>
   </div>
 </template>
 
@@ -46,38 +47,10 @@ export default class App extends Vue {
   Search(): void{
     if(this.selected==""){
       console.log("empty, first click")
-    }else if(this.selected!==this.previousSelected ){ //search functionality here
+    }
+    else if(this.selected!==this.previousSelected ){ //REPLACE THIS IS SOME TRIGGER TO THE OTHER VIEW!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       console.log("selected value Changed: " + this.selected)
-      this.previousSelected=this.selected;
-      const options = {
-        url: 'https://coronavirus-map.p.rapidapi.com/v1/spots/week',
-        params: {region: this.selected},
-        headers: {
-          'x-rapidapi-key': '098711bbdfmsh21dcfd23d779303p10951bjsnce5d1aafb119',
-          'x-rapidapi-host': 'coronavirus-map.p.rapidapi.com'
-        }
-      };
-
-      axios.request(options).then((response)=>{
-        this.passList.splice(0)
-        
-        console.log(response.data.data);
-          
-        for(let[key, value] of Object.entries(response.data.data)) {
-          var obj = JSON.parse(JSON.stringify(value))
-          this.passList.push({
-            date: key, 
-            critical: obj.critical,
-            deaths: obj.deaths,
-            death_ratio: obj.death_ratio,
-            recovered: obj.recovered,
-            recovery_ratio: obj.recovery_ratio,
-            total_cases: obj.total_cases,
-        })
-        }
-      }).catch(function (error) {
-        console.error(error);
-      });
+      this.previousSelected=this.selected; 
 
     }else if (this.selected==this.previousSelected){
       console.log("sameValue")
@@ -130,5 +103,19 @@ export default class App extends Vue {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+#content {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-areas: "world country activity" ;
+}
+#content> section:nth-child(1){
+  grid-area: world;
+}
+#content> section:nth-child(2){
+  grid-area: country;
+}
+#content> section:nth-child(3){
+  grid-area: activity;
 }
 </style>
