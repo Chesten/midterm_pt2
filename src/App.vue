@@ -15,9 +15,9 @@
         </div>
     </div >
     <div id="content">
-    <WorldStats v-bind:data="WorldStats"></WorldStats>
-    <CountryStats v-bind:country="selected"></CountryStats>
-    <ActivityLog ></ActivityLog>
+    <WorldStats v-bind:data="WorldStats" :toAppMsg="msg"></WorldStats>
+    <CountryStats v-bind:country="selected" :msg="msg"></CountryStats>
+    <ActivityLog v-bind:msg="msg" v-on:change="AddtoList()"></ActivityLog>
     </div>
   </div>
 </template>
@@ -43,6 +43,7 @@ export default class App extends Vue {
   private selected = "";
   private previousSelected = "3";
   private WorldStats:any[] = [];
+  public msg = ""
 
   Search(): void{
     if(this.selected==""){
@@ -71,16 +72,6 @@ export default class App extends Vue {
     };
 
     axios.request(options).then((response) => {
-      this.countyList.splice(0);  // remove old data
-      console.log(response.data.data.regions);
-      var temp = Object.keys(response.data.data.regions);
-      for(var i=0; i< temp.length; i++){
-        //console.log("tmp Country: " + temp[i])
-        this.countyList.push({
-          name: temp[i], 
-          ID: i
-        })
-      }
       ////NEW WAY!
       this.WorldStats.splice(0)
       for(let[key, value] of Object.entries(response.data.data.regions)){
@@ -92,8 +83,6 @@ export default class App extends Vue {
           DeathRate: obj.death_ratio
         })
       }
-
-
 
       }).catch(function (error) {
       console.error(error);

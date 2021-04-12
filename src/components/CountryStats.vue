@@ -90,6 +90,7 @@ import ApexChart from "vue-apexcharts";
 )
 export default class CountryStats extends Vue {
     @Prop() readonly country!:string;
+    @Prop() msg!: string;
     private data: any[] = [];
    
 
@@ -154,7 +155,7 @@ export default class CountryStats extends Vue {
         }
         this.fillDate();
         this.fillCase();
-
+        this.msg = "yearly data for " + this.country + " received"
       })
     }
     MonthSearch(): void{
@@ -187,6 +188,8 @@ export default class CountryStats extends Vue {
         
         this.fillDate();
         this.fillCase();
+        this.msg = "Monthly data for " + this.country + " received"
+
       })
     }
     WeekSearch(): void{
@@ -219,6 +222,8 @@ export default class CountryStats extends Vue {
         
         this.fillDate();
         this.fillCase();
+        this.msg = "weekly data for " + this.country + " received"
+
       })
     }
 }

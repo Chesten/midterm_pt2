@@ -52,6 +52,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 @Component
 export default class WorldStats extends Vue {
     @Prop() readonly data!: any[]
+    toAppMsg!: string
 
     range(z:any):any{
         if(z.RecoveryRate<0.5){
@@ -64,6 +65,7 @@ export default class WorldStats extends Vue {
     }
 
 
+
     NameSort(): void{
         this.data.sort(function(a, b){
             var nameA = a.name.toUpperCase()
@@ -72,6 +74,7 @@ export default class WorldStats extends Vue {
             else if(nameA>nameB) return 1
             else return 0
         })
+        this.toAppMsg = "World Stats: Name Sort"
     }
     TotalCasesSort():void{
         this.data.sort(function(a, b){
@@ -81,6 +84,7 @@ export default class WorldStats extends Vue {
             else if(nameA<nameB) return 1
             else return 0
         })
+        this.toAppMsg = "World Stats: Total Case Sort"
     }
     RecoverySort():void{
         this.data.sort(function(a, b){
@@ -90,6 +94,7 @@ export default class WorldStats extends Vue {
             else if(nameA<nameB) return 1
             else return 0
         })
+        this.toAppMsg = "World Stats: Recovery Rate Sort"
     }
 
 }
